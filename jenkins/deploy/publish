@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# depoy.sh will produce /tmp/.auth
+
+export IMAGE=$(sed -n '1p' /tmp/.auth)
+export TAG=$(sed -n '2p' /tmp/.auth)
+export PASSWD=$(sed -n '3p' /tmp/.auth)
+
+docker login -u manjunathhr -p $PASSWD
+cd $HOME/jenkins0H/maven/ && docker-compose up -d
+docker logs maven-app 
